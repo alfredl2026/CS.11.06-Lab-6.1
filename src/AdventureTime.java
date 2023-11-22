@@ -10,7 +10,11 @@ public class AdventureTime {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        System.out.println(challengeFour("inputThreeFour.txt"));
+        int challengeOneAnswer = challengeOne("InputOneTwo.txt");
+        int challengeTwoAnswer = challengeTwo("InputOneTwo.txt");
+        int challengeThreeAnswer = challengeThree("InputThreeFour.txt");
+        int challengeFourAnswer = challengeFour("InputThreeFour.txt");
+        writeFileAllAnswers("AdventureTime.txt", challengeOneAnswer, challengeTwoAnswer, challengeThreeAnswer, challengeFourAnswer);
     }
 
     /** TODO 1
@@ -47,9 +51,9 @@ public class AdventureTime {
         Scanner scanner = new Scanner(fileName);
         int countIncrease = 0;
         int[] array = readFile(fileName);
-        for (int i = 0; i<array.length-5; i++){
+        for (int i = 0; i<array.length-3; i++){
             sum1 = array[i] + array[i+1] + array[i+2];
-            sum2 = array[i+3] + array[i+4] + array[i+5];
+            sum2 = array[i+1] + array[i+2] + array[i+3];
             if(sum2>sum1) countIncrease++;
         }
         return countIncrease;
@@ -68,7 +72,7 @@ public class AdventureTime {
         Scanner scanner = new Scanner(fileName);
         int count = 0;
         int depth = 0;
-        String[] array = readFileString(fileName);
+        String[] array = readFileTwo(fileName);
         for (int i = 0; i<array.length; i++) {
             String[] check = array[i].split(" ", 2);
             if (check[0].equals("forward")) count += Integer.parseInt(check[1]);
@@ -92,19 +96,17 @@ public class AdventureTime {
         int count = 0;
         int depth = 0;
         int aim = 0;
-        String[] array = readFileString(filename);
+        String[] array = readFileTwo(filename);
         for (int i = 0; i<array.length; i++) {
             String[] check = array[i].split(" ", 2);
             if (check[0].equals("forward")){
-                depth += aim * Integer.parseInt(check[1]);
+                depth += (aim * Integer.parseInt(check[1]));
                 count += Integer.parseInt(check[1]);
             }
             else if (check[0].equals("down")){
-                depth += Integer.parseInt(check[1]);
                 aim += Integer.parseInt(check[1]);
             }
             else if (check[0].equals("up")){
-                depth -= Integer.parseInt(check[1]);
                 aim -= Integer.parseInt(check[1]);
             }
         }
@@ -139,7 +141,7 @@ public class AdventureTime {
         scanner.close();
         return data;
     }
-    private static String[] readFileString(String inputFilename) throws FileNotFoundException {
+    private static String[] readFileTwo(String inputFilename) throws FileNotFoundException {
         File file = new File(inputFilename);
         Scanner scanner = new Scanner(file);
         int numberOfLinesInFile = countLinesInFile(inputFilename);
